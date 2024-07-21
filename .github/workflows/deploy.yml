@@ -27,16 +27,16 @@ jobs:
           gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin us-east1-docker.pkg.dev
 
       - name: Build image
-        run: docker build . --tag "us-east1-docker.pkg.dev/fiap-postech/modulo4/ms-id:latest"
+        run: docker build . --tag "us-east1-docker.pkg.dev/fiap-postech/hackathon/app:latest"
 
       - name: Push image
-        run: docker push "us-east1-docker.pkg.dev/fiap-postech/modulo4/ms-id:latest"
+        run: docker push "us-east1-docker.pkg.dev/fiap-postech/hackathon/app:latest"
 
       - name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          image: us-east1-docker.pkg.dev/fiap-postech/modulo4/ms-id:latest
-          service: ms-id
+          image: us-east1-docker.pkg.dev/fiap-postech/hackathon/app:latest
+          service: app
           region: us-east1
           platform: managed
           allow-unauthenticated: true
