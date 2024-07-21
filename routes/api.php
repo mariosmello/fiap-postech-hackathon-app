@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 
-Route::post('login', [AuthController::class, 'login']);
+Route::post('doctor/login', [AuthController::class, 'login_doctor']);
+Route::post('patient/login', [AuthController::class, 'login_patient']);
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware(['auth:api', 'role:patient'])->group(function () {
     Route::post('users/create', [AuthController::class, 'store']);
-    Route::post('users/delete-request', [\App\Http\Controllers\DeleteRequestController::class, 'store']);
 });

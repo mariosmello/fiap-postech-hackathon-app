@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,12 +14,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        if (!User::where('email', 'unidentified@unidentified.com')->first()) {
+
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        Role::updateOrCreate(['name' => 'admin']);
+        Role::updateOrCreate(['name' => 'patient']);
+        Role::updateOrCreate(['name' => 'doctor']);
+
+        if (!User::where('email', 'doctor@doctor.com')->first()) {
             User::factory()->create([
-                'name' => 'Unidentified User',
-                'email' => 'unidentified@unidentified.com',
+                'name' => 'Doctor',
+                'email' => 'doctor@doctor.com',
+                'document' => '81456693085',
+                'crm' => '52831999',
                 'password' => '123',
-            ]);
+            ])->assignRole('doctor');
         }
+
+        if (!User::where('email', 'patient@patient.com')->first()) {
+            User::factory()->create([
+                'name' => 'Patient',
+                'email' => 'patient@patient.com',
+                'document' => '19091163194',
+                'password' => '123',
+            ])->assignRole('patient');
+        }
+
     }
 }
