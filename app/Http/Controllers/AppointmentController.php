@@ -15,7 +15,7 @@ class AppointmentController extends Controller
     {
         $availabilities = UserAvailability::where('user_availabilities.user_id', $user->id)
             ->whereDoesntHave('appointments', function($q) {
-                $q->where('status', '!=', 'declined');
+                $q->whereNotIn('status', ['declined', 'canceled']);
             })
             ->where(DB::raw("CONCAT(date, ' ', start_time)"), '>', Carbon::now()->format('Y-m-d H:i:s'))
             ->orderBy('date')
@@ -36,7 +36,7 @@ class AppointmentController extends Controller
     // Store a new appointment
     public function store(User $user, UserAvailability $userAvailability)
     {
-        if ($userAvailability->appointments()->where('status', '!=', 'declined')->count()) {
+        if ($userAvailability->appointments()->whereNotIn('status', ['declined', 'canceled'])->count()) {
             return response()->json(['error' => 'Agenda não disponível'], 409);
         }
 
