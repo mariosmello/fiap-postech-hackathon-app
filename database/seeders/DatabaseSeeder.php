@@ -30,6 +30,8 @@ class DatabaseSeeder extends Seeder
             ])->assignRole('doctor');
         }
 
+        User::factory(10)->roleDoctor()->create();
+
         if (!User::where('email', 'patient@patient.com')->first()) {
             User::factory()->create([
                 'name' => 'Patient',

@@ -79,6 +79,11 @@ class User extends Authenticatable implements JWTSubject
 
     public function specialties()
     {
-        return $this->belongsToMany(MedicalSpecialty::class, 'user_specialty')->withPivot('price')->withTimestamps();
+        return $this->belongsToMany(MedicalSpecialty::class, 'user_specialty')->withPivot('price');
+    }
+
+    public function availabilities()
+    {
+        return $this->hasMany(UserAvailability::class);
     }
 }

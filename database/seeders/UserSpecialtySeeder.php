@@ -19,5 +19,12 @@ class UserSpecialtySeeder extends Seeder
         $specialty = MedicalSpecialty::where('name', 'Cardiologia')->first();
         $user = User::where('email', 'doctor@doctor.com')->first();
         $user->specialties()->attach($specialty->id, ['price' => 150.00]);
+
+        $users = User::where('email', '<>', 'doctor@doctor.com')->get();
+        foreach ($users as $user) {
+            $specialty = MedicalSpecialty::inRandomOrder()->first();
+            $user->specialties()->attach($specialty->id, ['price' => rand(90, 165)]);
+        }
+
     }
 }

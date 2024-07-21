@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('crm')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->tinyInteger('rating');
             $table->rememberToken();
             $table->timestamps();
         });
