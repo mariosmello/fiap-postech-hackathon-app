@@ -27,4 +27,5 @@ Route::middleware(['auth:api', 'role:patient'])->prefix('patient')->group(functi
     Route::get('doctors/{user}/availabilities', [AppointmentController::class, 'index']);
     Route::post('doctors/{user}/availabilities/{user_availability}', [AppointmentController::class, 'store']);
     Route::get('appointments', [AppointmentPatientController::class, 'index']);
+    Route::put('appointments/{appointment}/cancel', [AppointmentPatientController::class, 'cancel']);
 });

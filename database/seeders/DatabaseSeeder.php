@@ -32,11 +32,20 @@ class DatabaseSeeder extends Seeder
 
         User::factory(10)->roleDoctor()->create();
 
-        if (!User::where('email', 'patient@patient.com')->first()) {
+        if (!User::where('email', 'patient1@patient.com')->first()) {
             User::factory()->create([
-                'name' => 'Patient',
-                'email' => 'patient@patient.com',
+                'name' => 'Patient 1',
+                'email' => 'patient1@patient.com',
                 'document' => '19091163194',
+                'password' => '123',
+            ])->assignRole('patient');
+        }
+
+        if (!User::where('email', 'patient2@patient.com')->first()) {
+            User::factory()->create([
+                'name' => 'Patient 2',
+                'email' => 'patient2@patient.com',
+                'document' => '31136951040',
                 'password' => '123',
             ])->assignRole('patient');
         }

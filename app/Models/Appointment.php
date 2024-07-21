@@ -14,6 +14,7 @@ class Appointment extends Model
         'availability_id',
         'status',
         'meeting_url',
+        'status_reason',
     ];
 
     public function patient()

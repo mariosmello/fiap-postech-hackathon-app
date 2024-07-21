@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('availability_id')->constrained('user_availabilities')->onDelete('cascade');
             $table->string('status');
             $table->string('meeting_url')->nullable();
+            $table->text('status_reason')->nullable();
             $table->timestamps();
         });
     }
