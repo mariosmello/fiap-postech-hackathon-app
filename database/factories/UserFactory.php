@@ -49,7 +49,7 @@ class UserFactory extends Factory
     public function roleDoctor(): static
     {
         return $this->afterCreating(function (User $user) {
-                $user->assignRole('Doctor');
+                $user->assignRole('doctor');
             });
     }
 
