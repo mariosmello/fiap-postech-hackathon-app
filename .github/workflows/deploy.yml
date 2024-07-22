@@ -44,4 +44,3 @@ jobs:
             DB_CONNECTION=sqlite
           secrets: |-
             JWT_SECRET=JWT_SECRET:latest
-            DB_PASSWORD=DB_PASSWORD:latest
